@@ -16,7 +16,6 @@ function appendProducts() {
     keys.sort().reverse()
     for (let card of keys) {
         if (card != 'counter') {
-            console.log(card)
             let localCard = JSON.parse(localStorage.getItem(card))
             let products = document.querySelector('.products')
             let productsCard = document.createElement('div')
