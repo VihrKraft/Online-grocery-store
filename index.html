@@ -9,7 +9,36 @@
 </head>
 
 <body>
-    <div class="products"></div>
+    <div class="products">
+        <div class="products__add products__card">
+            <img src="img/add.svg" alt="Добавить" class="add_img">
+            <div class="form__fields">
+                <form class="add__form">
+                    Путь до изображения
+                    <input type="text" class="form__image-path text-field" id="image-path" name="image_path" required>
+                    Оценка
+                    <input type="text" class="form__rating text-field" id="rating" name="rating" required>
+                    Ккал.
+                    <input type="text" class="form__value text-field" id="value" name="value" required>
+                    Название
+                    <input type="text" class="form__name text-field" id="name" name="name" required>
+                    Цена
+                    <input type="text" class="form__cost text-field" id="cost" name="cost" required>
+                    <div class="button-block">
+                        <button class="form__button" type="submit">Отправить</button>
+                    </div>
+                </form>
+                
+            </div>
+        </div> 
+    </div>
+    <div class="modal">
+        <div class="modal__title">Вы точно хотите удалить данный элемент?</div>
+        <div class="modal__buttons">
+            <button id="yes" class="modal__button">Да</button>
+            <button id="no" class="modal__button">Нет</button>
+        </div>
+    </div>
     <script src="script.js"></script>
     <script src="https://replit.com/public/js/replit-badge-v2.js" theme="dark" position="bottom-right"></script>
 </body>

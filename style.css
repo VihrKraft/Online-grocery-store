@@ -1,5 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
+
+@keyframes shaky {
+    from {
+        top: 0%;
+    }
+    50% {
+        top: 6%;
+    }
+    to {
+        top:3%;
+    } 
+}
+@keyframes shaky-close {
+    from {
+        top: 3%;
+    }
+    50% {
+        top: 7%;
+    }
+    to {
+        top: -100%;
+    } 
+}
 html {
     height: 100%;
     width: 100%;
@@ -7,6 +31,7 @@ html {
 .products{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     width: 100%;
     padding: 20px;
     margin: 20px;
@@ -86,4 +111,103 @@ html {
     width: 20px;
     height: 20px;
     display: block;
+}
+.products__add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+.add_img {
+    width: 40%;
+    opacity: 1;
+    visibility: visible;
+}
+.add_img.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+.text-field {
+    width: 100%;
+    margin-bottom: 10px;
+}
+.text-field:last-child {
+    margin-bottom: 0;
+}
+.form__fields {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    width: 85%;
+}
+.form__fields.show {
+    opacity: 1;
+    visibility: visible;
+}
+.button-block {
+    display: flex;
+    justify-content: center;
+}
+.card__delete {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: -10px;
+    top: -15px;
+    cursor: pointer;
+    opacity: 0;
+    transition: 0.3s;
+    visibility: hidden;
+}
+.products__card:hover .card__delete {
+    opacity: 1;
+    visibility: visible;
+}
+.modal {
+    position: absolute;
+    width: 25%;
+    height: 100px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    background-color: white;
+    left: 50%;
+    transform: translate(-50%);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 2;
+    top: -100%;
+}
+.modal.active {
+    animation: shaky ease-in-out 0.5s forwards;
+}
+.modal.closed {
+    animation: shaky-close ease-in-out 0.5s forwards;
+}
+.modal__title {
+    font-size: 18px;
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bolder;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
+}
+.modal__buttons {
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+}
+.modal__button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+#yes {
+    margin-right: 10px;
 }

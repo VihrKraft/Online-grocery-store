@@ -8,7 +8,14 @@ if (localStorage.counter) {
 function createProduct(card) {
     counter += 1
     localStorage.setItem('counter', counter)
-    localStorage.setItem(`card${localStorage.counter}`, JSON.stringify(card))
+    localStorage.setItem(`card${localStorage.counter}`, JSON.stringify({
+        'number': counter,
+        'image': card.image,
+        'rating': card.rating,
+        'value': card.value,
+        'name': card.name,
+        'cost': card.cost,
+    }))
 }
 
 function appendProducts() {
@@ -20,7 +27,8 @@ function appendProducts() {
             let products = document.querySelector('.products')
             let productsCard = document.createElement('div')
             productsCard.className = 'products__card'
-            productsCard.innerHTML = `<div class="card__image-block">
+            productsCard.innerHTML = `<img src="img/delete.svg" alt="Х" type="submit" data=${localCard.number} class="card__delete">
+                        <div class="card__image-block">
                             <img src="${localCard.image}" alt="" class="card__image">
                         </div>
                         <div class="card__description">
@@ -47,12 +55,48 @@ function appendProducts() {
     
 }
 
+let form = document.querySelector(".add__form")
+let add_img = document.querySelector('.add_img')
+let form__fields = document.querySelector('.form__fields')
+let button = document.querySelector('.form__button')
+let modal = document.querySelector('.modal')
+add_img.addEventListener('click', function () {
+    add_img.classList.add("hide")
+    form__fields.classList.add('show')
+})
 
-createProduct({
-    'image': 'img/2.webp',
-    'rating': '4.98',
-    'value': '5000ккал.',
-    'name': 'Стейк из грудинки охлажденный',
-    'cost': '7000',
+button.addEventListener('click', function (event) {
+    event.preventDefault()
+    if (form.checkValidity()) {
+        createProduct({
+            'image': form.image_path.value,
+            'rating': form.rating.value,
+            'value': form.value.value,
+            'name': form.name.value,
+            'cost': form.cost.value,
+        })
+    }
 })
 appendProducts()
+let delete_buttons = document.querySelectorAll('.card__delete')
+for (delete_button of delete_buttons) {
+    delete_button.addEventListener('click', function () {
+        modal.classList.add("active")
+        modal.classList.remove("closed")
+        yesButton.addEventListener('click', function () {
+            let numProduct = delete_button.getAttribute("data")
+            localStorage.removeItem(`card${numProduct}`)
+            modal.classList.add("closed")
+            modal.classList.remove("active")
+            setTimeout(function () {
+                location.reload()
+            }, 600)
+        })
+    })
+}
+let yesButton = document.querySelector("#yes")
+let noButton = document.querySelector("#no")
+noButton.addEventListener('click', function () {
+    modal.classList.add("closed")
+    modal.classList.remove("active")
+})
